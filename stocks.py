@@ -24,7 +24,7 @@ N_STEPS = 7
 LOOKUP_STEPS = [1, 2, 3]
 
 # Stock ticker, GOOGL
-STOCK = 'MT'
+STOCK = 'RUN'
 
 # Current date
 date_now = tm.strftime('%Y-%m-%d')
@@ -132,14 +132,14 @@ for step in LOOKUP_STEPS:
 
   predictions.append(round(float(predicted_price), 2))
 
-if bool(predictions) == True and len(predictions) > 0:
-  predictions_list = [str(d)+'$' for d in predictions]
-  predictions_str = ', '.join(predictions_list)
-  message = f'{STOCK} prediction for upcoming 3 days ({predictions_str})'
+  if bool(predictions) == True and len(predictions) > 0:
+    predictions_list = [str(d)+'$' for d in predictions]
+    predictions_str = ', '.join(predictions_list)
+    message = f'{STOCK} prediction for upcoming 3 days ({predictions_str})'
   
   print(message)
 
-# Execute model for the whole history range
+  # Execute model for the whole history range
 copy_df = init_df.copy()
 y_predicted = model.predict(x_train)
 y_predicted_transformed = np.squeeze(scaler.inverse_transform(y_predicted))
